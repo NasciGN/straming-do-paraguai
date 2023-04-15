@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:streaming_do_paraguai/modelviews/tmdb_service.dart';
 
-class DownloadPage extends StatelessWidget {
-  const DownloadPage({Key? key}) : super(key: key);
+class DownloadPage extends StatefulWidget {
+  const DownloadPage({super.key});
 
   @override
+  State<DownloadPage> createState() => _DownloadPageState();
+}
+
+class _DownloadPageState extends State<DownloadPage> {
+  // String filme = '157336';
+  // late Map<String, dynamic> filmData = Map();
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchFilm(filme).then((data) {
+  //     filmData = data;
+  //   });
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDefaultIconDarkColor,
@@ -13,6 +31,12 @@ class DownloadPage extends StatelessWidget {
             SizedBox(
               height: 100,
             ),
+            //   Text(
+            //     'Nome: ${filmData["original_title"]}',
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            //   Image.network(
+            //       'https://image.tmdb.org/t/p/w500${filmData["poster_path"]}'),
           ],
         ),
       ),
