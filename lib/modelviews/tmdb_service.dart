@@ -21,6 +21,7 @@ class TmdbService {
       Filmes filme = await fetchMovieDetails(filmeJason[
           'id']); // Chama o metodo para buscar os detalhes de cada filme com base no ID obtido na linha anterior, Esse método retorna um objeto
       filmes.add(filme); // Adiciona o objeto dentro da lista de filmes
+      print('Filme adicionado: $filmes.toString()');
     }
     return filmes;
   }
@@ -29,20 +30,25 @@ class TmdbService {
   Future<Filmes> fetchMovieDetails(int idFilme) async {
     final response = await http.get(Uri.parse(
         '$baseURL/movie/$idFilme?api_key=$urlAPI&append_to_response=videos&language=pt-BR')); // Busca o filme com base no ID fornecido
-    var filmeJson = jsonDecode(response.body);
 
-    List<String> generos = [];
-    for (var genreJson in filmeJson['genres']) {
-      // Percorre o dicionario da lista de generos e os adiciona numa lista
-      generos.add(genreJson['name']);
+    if (response.statusCode == 200) {
+      var filmeJson = jsonDecode(response.body);
+
+      List<String> generos = [];
+      for (var genreJson in filmeJson['genres']) {
+        // Percorre o dicionario da lista de generos e os adiciona numa lista
+        generos.add(genreJson['name']);
+      }
+
+      return Filmes(
+        titulo: filmeJson['original_title'],
+        sinopse: filmeJson['overview'],
+        nota: filmeJson['vote_average'],
+        genero: generos,
+        urlPoster: '$imgURL${filmeJson['poster_path']}',
+      );
+    } else {
+      throw Exception('Falha ao carregar detalhes do filme');
     }
-
-    return Filmes(
-      titulo: filmeJson['original_title'],
-      sinopse: filmeJson['overview'],
-      nota: filmeJson['vote_average'],
-      genero: generos,
-      urlPoster: filmeJson['/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg'],
-    );
   }
 }

@@ -59,44 +59,55 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              children: const [
-                Text(
-                  'Populares',
-                  style: TextStyle(color: Colors.white, fontSize: 17),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    children: const [
+                      Text(
+                        'Populares',
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movieList.length - 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CardFilme(filme: movieList[index + 1]);
+                      }),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: const [
+                      Text(
+                        'Filmes',
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movieList.length - 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CardFilme(filme: movieList[index + 1]);
+                      }),
                 ),
               ],
             ),
-          ),
-          Text(
-            'O valor da minha lista de filmes é $movieList',
-            style: TextStyle(color: Colors.white),
-          ),
-          /* GridView.builder(
-              scrollDirection: Axis.horizontal,
-              semanticChildCount: 5,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 3 / 1,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20),
-              itemCount: movieList.length - 1,
-              itemBuilder: (BuildContext context, index) {
-                return CardFilme(filme: movieList[index + 1]);
-              }), */
-          const SizedBox(
-            height: 40,
-          ),
-        ],
-      ),
       bottomNavigationBar: BottomAppBar(
           padding: const EdgeInsets.all(10), child: FotterAppBar()),
     );
