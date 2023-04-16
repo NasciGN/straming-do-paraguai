@@ -12,7 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Filmes> movieList = [];
+  List<Filmes> popularMovieList = [];
+  List<Filmes> upComingMovieList = [];
   bool isLoading = true;
 
   @override
@@ -24,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void fetchMovies() async {
     try {
       TmdbService tmdbService = TmdbService();
-      movieList = await tmdbService.fetchPopularMovies();
+      popularMovieList = await tmdbService.fetchPopularMovies();
+      upComingMovieList = await tmdbService.fetchUpComingMovies();
     } catch (e) {
       print('Erro ao carregar filmes: $e');
     } finally {
@@ -81,9 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: movieList.length - 1,
+                      itemCount: popularMovieList.length - 1,
                       itemBuilder: (BuildContext context, int index) {
-                        return CardFilme(filme: movieList[index + 1]);
+                        return CardFilme(filme: popularMovieList[index + 1]);
                       }),
                 ),
                 Container(
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.max,
                     children: const [
                       Text(
-                        'Filmes',
+                        'Em breve nos cinemas',
                         style: TextStyle(color: Colors.white, fontSize: 17),
                       ),
                     ],
@@ -101,9 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: movieList.length - 1,
+                      itemCount: upComingMovieList.length - 1,
                       itemBuilder: (BuildContext context, int index) {
-                        return CardFilme(filme: movieList[index + 1]);
+                        return CardFilme(filme: upComingMovieList[index + 1]);
                       }),
                 ),
               ],

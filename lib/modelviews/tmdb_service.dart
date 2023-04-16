@@ -7,11 +7,64 @@ class TmdbService {
   String baseURL = 'https://api.themoviedb.org/3';
   String imgURL = 'https://image.tmdb.org/t/p/w500';
 
-//
   // BUSCA OS FILMES POPULARES
   Future<List<Filmes>> fetchPopularMovies() async {
     final http.Response response =
         await http.get(Uri.parse('$baseURL/movie/popular?api_key=$urlAPI'));
+
+    List<Filmes> filmes =
+        []; // Cria uma lista de Objetos para receber os filmes populares.
+    var jsonResponse = json.decode(response.body);
+    for (var filmeJason in jsonResponse['results']) {
+      // Percorre o JSON de results para armazenar o ID de cada filme que está lá
+      Filmes filme = await fetchMovieDetails(filmeJason[
+          'id']); // Chama o metodo para buscar os detalhes de cada filme com base no ID obtido na linha anterior, Esse método retorna um objeto
+      filmes.add(filme); // Adiciona o objeto dentro da lista de filmes
+      print('Filme adicionado: $filmes.toString()');
+    }
+    return filmes;
+  }
+
+  // BUSCA OS FILMES MAIS BEM AVALIADOS
+  Future<List<Filmes>> fetchTopRaterMovies() async {
+    final http.Response response =
+        await http.get(Uri.parse('$baseURL/movie/top_rated?api_key=$urlAPI'));
+
+    List<Filmes> filmes =
+        []; // Cria uma lista de Objetos para receber os filmes populares.
+    var jsonResponse = json.decode(response.body);
+    for (var filmeJason in jsonResponse['results']) {
+      // Percorre o JSON de results para armazenar o ID de cada filme que está lá
+      Filmes filme = await fetchMovieDetails(filmeJason[
+          'id']); // Chama o metodo para buscar os detalhes de cada filme com base no ID obtido na linha anterior, Esse método retorna um objeto
+      filmes.add(filme); // Adiciona o objeto dentro da lista de filmes
+      print('Filme adicionado: $filmes.toString()');
+    }
+    return filmes;
+  }
+
+  // BUSCA OS FILMES QUE SERAO EXIBIDOS EM BREVE
+  Future<List<Filmes>> fetchUpComingMovies() async {
+    final http.Response response =
+        await http.get(Uri.parse('$baseURL/movie/upcoming?api_key=$urlAPI'));
+
+    List<Filmes> filmes =
+        []; // Cria uma lista de Objetos para receber os filmes populares.
+    var jsonResponse = json.decode(response.body);
+    for (var filmeJason in jsonResponse['results']) {
+      // Percorre o JSON de results para armazenar o ID de cada filme que está lá
+      Filmes filme = await fetchMovieDetails(filmeJason[
+          'id']); // Chama o metodo para buscar os detalhes de cada filme com base no ID obtido na linha anterior, Esse método retorna um objeto
+      filmes.add(filme); // Adiciona o objeto dentro da lista de filmes
+      print('Filme adicionado: $filmes.toString()');
+    }
+    return filmes;
+  }
+
+  // BUSCA OS FILMES EM CARTAZ
+  Future<List<Filmes>> fetchPlayNowMovies() async {
+    final http.Response response =
+        await http.get(Uri.parse('$baseURL/movie/now_playing?api_key=$urlAPI'));
 
     List<Filmes> filmes =
         []; // Cria uma lista de Objetos para receber os filmes populares.
@@ -41,7 +94,8 @@ class TmdbService {
       }
 
       return Filmes(
-        titulo: filmeJson['original_title'],
+        tituloOriginal: filmeJson['original_title'],
+        titulo: filmeJson['title'],
         sinopse: filmeJson['overview'],
         nota: filmeJson['vote_average'],
         genero: generos,

@@ -12,10 +12,19 @@ class CardDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kDefaultIconDarkColor,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(filme.titulo),
+        backgroundColor: Color.fromARGB(150, 0, 0, 4),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Column(children: [Text(filme.titulo)]),
+      body: Column(children: [
+        Image.network(filme.urlPoster),
+        Text('Descrição: ${filme.sinopse}',
+            style: const TextStyle(color: Colors.white))
+      ]),
     );
   }
 }

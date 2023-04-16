@@ -12,17 +12,6 @@ class DownloadPage extends StatefulWidget {
 }
 
 class _DownloadPageState extends State<DownloadPage> {
-  // String filme = '157336';
-  // late Map<String, dynamic> filmData = Map();
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchFilm(filme).then((data) {
-  //     filmData = data;
-  //   });
-  // }
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDefaultIconDarkColor,
