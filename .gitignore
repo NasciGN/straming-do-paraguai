@@ -9,3 +9,4 @@ web
 analysis_options.yaml
 pubspec.lock
 streaming_do_paraguai.iml
+teste_request.http

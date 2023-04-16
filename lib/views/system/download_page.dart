@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:streaming_do_paraguai/modelviews/tmdb_service.dart';
+import '../widgets/bottom_bar.dart';
 
 class DownloadPage extends StatefulWidget {
   const DownloadPage({super.key});
@@ -40,41 +41,8 @@ class _DownloadPageState extends State<DownloadPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/home');
-              },
-              child: const Icon(
-                Icons.home_filled,
-                size: 40,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/download');
-              },
-              child: const Icon(
-                Icons.file_download_outlined,
-                size: 40,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/search');
-              },
-              child: const Icon(
-                Icons.search,
-                size: 40,
-              ),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: const BottomAppBar(
+          padding: EdgeInsets.all(10), child: FotterAppBar()),
     );
   }
 }

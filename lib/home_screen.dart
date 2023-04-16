@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:streaming_do_paraguai/models/filmes.dart';
 import 'package:streaming_do_paraguai/modelviews/tmdb_service.dart';
-import 'package:streaming_do_paraguai/pages/widgets/item_card.dart';
+import 'package:streaming_do_paraguai/views/widgets/item_card.dart';
+import 'views/widgets/bottom_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -75,7 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          GridView.builder(
+          Text(
+            'O valor da minha lista de filmes é $movieList',
+            style: TextStyle(color: Colors.white),
+          ),
+          /* GridView.builder(
               scrollDirection: Axis.horizontal,
               semanticChildCount: 5,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -86,48 +91,14 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: movieList.length - 1,
               itemBuilder: (BuildContext context, index) {
                 return CardFilme(filme: movieList[index + 1]);
-              }),
+              }), */
           const SizedBox(
             height: 40,
           ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/home');
-              },
-              child: const Icon(
-                Icons.home_filled,
-                size: 40,
-                color: Colors.black,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/download');
-              },
-              child: const Icon(
-                Icons.file_download_outlined,
-                size: 40,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/search');
-              },
-              child: const Icon(
-                Icons.search,
-                size: 40,
-              ),
-            )
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.all(10), child: FotterAppBar()),
     );
   }
 }

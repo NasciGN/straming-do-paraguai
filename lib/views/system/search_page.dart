@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/bottom_bar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -63,41 +64,8 @@ class SearchPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/home');
-              },
-              child: const Icon(
-                Icons.home_filled,
-                size: 40,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/download');
-              },
-              child: const Icon(
-                Icons.file_download_outlined,
-                size: 40,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/search');
-              },
-              child: const Icon(
-                Icons.search,
-                size: 40,
-              ),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: const BottomAppBar(
+          padding: EdgeInsets.all(10), child: FotterAppBar()),
     );
   }
 }

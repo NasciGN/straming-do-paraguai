@@ -1,21 +1,3 @@
-// import 'dart:convert';
-//
-// import 'package:http/http.dart' as http;
-//
-// final String url = "https://api.themoviedb.org/3/movie/550?api_key=1eea2e5c113db4b971e3bbf50ec104c80";
-//
-// Future main() async{
-//   final json = await fetch();
-//   print('')
-// }
-//
-// Future<Map> fetch() async{
-//   final String url = "https://api.themoviedb.org/3/movie/550?api_key=1eea2e5c113db4b971e3bbf50ec104c80";
-//   var respose = await http.get(Uri.parse(url));
-//   var json = jsonDecode(respose.body);
-//   return json;
-// }
-
 import 'package:http/http.dart' as http;
 import '../models/filmes.dart';
 import 'dart:convert';
@@ -25,6 +7,7 @@ class TmdbService {
   String baseURL = 'https://api.themoviedb.org/3';
   String imgURL = 'https://image.tmdb.org/t/p/w500';
 
+//
   // BUSCA OS FILMES POPULARES
   Future<List<Filmes>> fetchPopularMovies() async {
     final http.Response response =
